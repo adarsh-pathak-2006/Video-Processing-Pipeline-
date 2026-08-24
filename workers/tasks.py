@@ -1,8 +1,14 @@
 import time
 from celery import shared_task
 from core.models import Video
-from .models import ProcessinJOb
+from .models import ProcessingJOb
 
 @shared_task
-def VideoProcessing()
+def VideoProcessingQueue():
+    ProcessingJOb.status='PENDING'
+    ProcessingJOb.save()
+    time.sleep(10)
+    ProcessingJOb.status='COMPLETED'
+    ProcessingJOb.save()
+
 
